@@ -1,0 +1,6 @@
+backend/.env
+frontend/.env
+backend/node_modules/
+frontend/node_modules/
+backend/booking-system-e594d-firebase-adminsdk-obymp-8586f3e2d8.json
+frontend/src/firebaseConfig.js
