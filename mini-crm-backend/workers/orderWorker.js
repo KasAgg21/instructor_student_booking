@@ -1,16 +1,13 @@
-// workers/orderWorker.js
 const Queue = require('bull');
 const Order = require('../models/Order');
 const dotenv = require('dotenv');
 
 dotenv.config();
 
-// Initialize Bull Queue
 const orderQueue = new Queue('orderQueue', process.env.REDIS_URL);
 
 console.log("Order Worker: Connecting to Redis at", process.env.REDIS_URL);
 
-// Event Listeners for Debugging
 orderQueue.on('error', (error) => {
   console.error('Order Worker: Queue Error:', error);
 });
@@ -35,7 +32,6 @@ orderQueue.on('failed', (job, err) => {
   console.log(`Order Worker: Failed job ID ${job.id} with error:`, err);
 });
 
-// Process order jobs
 orderQueue.process(async (job, done) => {
   try {
     console.log(`Order Worker: Received job ID ${job.id} with data:`, job.data);

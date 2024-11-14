@@ -1,15 +1,13 @@
-// models/User.js
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
   email: { type: String, unique: true, required: true },
-  password: { type: String }, // Optional for Google-authenticated users
-  googleId: { type: String, unique: true, sparse: true }, // Unique if Google-authenticated
+  password: { type: String }, 
+  googleId: { type: String, unique: true, sparse: true }, 
   name: { type: String },
 });
 
-// Hash password before saving
 userSchema.pre('save', async function (next) {
   try {
     if (!this.isModified('password')) return next();
@@ -22,7 +20,6 @@ userSchema.pre('save', async function (next) {
   }
 });
 
-// Method to compare passwords
 userSchema.methods.comparePassword = async function (candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 };

@@ -1,16 +1,13 @@
-// routes/segmentRoutes.js
 const express = require('express');
 const router = express.Router();
 const Segment = require('../models/Segment');
 const Customer = require('../models/Customer');
 const ensureAuthenticated = require('../middleware/authMiddleware');
 
-// Calculate Audience Size
 router.post('/calculate-size', ensureAuthenticated, async (req, res) => {
   try {
     const { conditions, logicOperator } = req.body;
 
-    // Build MongoDB query dynamically
     let query = conditions.map((condition) => {
       return { [condition.field]: { [`$${condition.operator}`]: condition.value } };
     });
@@ -24,7 +21,6 @@ router.post('/calculate-size', ensureAuthenticated, async (req, res) => {
   }
 });
 
-// Save Segment
 router.post('/', ensureAuthenticated, async (req, res) => {
   try {
     const { name, conditions, logicOperator } = req.body;

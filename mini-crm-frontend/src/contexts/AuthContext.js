@@ -1,4 +1,3 @@
-// src/contexts/AuthContext.js
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -6,9 +5,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // To handle initial loading state
-
-  // Check if the user is already authenticated
+  const [loading, setLoading] = useState(true); 
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/auth/check-auth`, { withCredentials: true })

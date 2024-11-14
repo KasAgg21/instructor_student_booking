@@ -1,4 +1,3 @@
-// src/components/Login.jsx
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
@@ -14,14 +13,13 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(email, password);
-      navigate('/'); // Redirect to the Segment Builder
+      navigate('/'); 
     } catch (error) {
       alert('Login failed. Please check your credentials.');
     }
   };
 
   const handleGoogleLogin = () => {
-    // Redirect the user to the backend's Google OAuth endpoint
     window.location.href = `${process.env.REACT_APP_API_URL}/auth/google`;
   };
 

@@ -1,4 +1,3 @@
-// auth.js
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -7,7 +6,6 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-// Local Strategy for email/password
 passport.use(
   new LocalStrategy(
     { usernameField: 'email' },
@@ -31,7 +29,6 @@ passport.use(
   )
 );
 
-// Google Strategy
 passport.use(
   new GoogleStrategy(
     {
@@ -41,14 +38,12 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        // Check if user with Google ID exists
         let user = await User.findOne({ googleId: profile.id });
 
         if (user) {
           return done(null, user);
         }
 
-        // If not, create a new user
         user = new User({
           googleId: profile.id,
           email: profile.emails[0].value,
@@ -64,12 +59,10 @@ passport.use(
   )
 );
 
-// Serialize user into the sessions
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-// Deserialize user from the sessions
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);

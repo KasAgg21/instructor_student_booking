@@ -1,10 +1,8 @@
-// routes/customerRoutes.js
 const express = require('express');
 const router = express.Router();
 const Customer = require('../models/Customer');
 const ensureAuthenticated = require('../middleware/authMiddleware');
 
-// Create a new customer
 router.post('/', ensureAuthenticated, async (req, res) => {
   try {
     const customer = new Customer(req.body);
@@ -15,7 +13,6 @@ router.post('/', ensureAuthenticated, async (req, res) => {
   }
 });
 
-// Get all customers
 router.get('/', ensureAuthenticated, async (req, res) => {
   try {
     const customers = await Customer.find();

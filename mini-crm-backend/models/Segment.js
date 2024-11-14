@@ -1,4 +1,3 @@
-// models/Segment.js
 const mongoose = require('mongoose');
 
 const segmentSchema = new mongoose.Schema({

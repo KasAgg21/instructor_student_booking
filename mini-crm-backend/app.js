@@ -1,4 +1,3 @@
-// app.js
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -17,11 +16,10 @@ dotenv.config();
 
 const app = express();
 
-// Middleware
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: 'http://localhost:3000', // Frontend URL
+    origin: 'http://localhost:3000', 
     credentials: true,
   })
 );
@@ -35,7 +33,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Routes
 app.use('/auth', authRoutes);
 app.use('/customers', customerRoutes);
 app.use('/orders', orderRoutes);
@@ -43,7 +40,6 @@ app.use('/segments', segmentRoutes);
 app.use('/campaigns', campaignRoutes);
 app.use('/messages', messageRoutes);
 
-// Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Backend server is running on port ${PORT}`);
